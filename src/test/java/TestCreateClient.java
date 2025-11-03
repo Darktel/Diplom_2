@@ -1,4 +1,4 @@
-import client.CheckClient;
+import checks.CheckClient;
 import client.ClientClient;
 import io.restassured.response.Response;
 import models.Client;

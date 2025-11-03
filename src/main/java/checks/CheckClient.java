@@ -1,4 +1,4 @@
-package client;
+package checks;
 
 import base.BaseHttpClient;
 import io.qameta.allure.Step;

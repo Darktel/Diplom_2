@@ -4,7 +4,6 @@ import base.BaseHttpClient;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import models.Client;
-import models.TokenClient;
 
 import static io.restassured.RestAssured.given;
 
