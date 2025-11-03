@@ -83,8 +83,29 @@ public class CheckClient{
                 .body("refreshToken", not(emptyString()));
     }
 
+    @Step("Проверка ошибки при некорректных данных при авторизации")
     public void checkErrorLoginClient(Response response) {
         response.then().body("success", is(false))
                 .body("message", is("email or password are incorrect"));
+    }
+
+    @Step("Проверка успешности смены данны пользователя")
+    public void checkSuccessChangeDataClient(Response response, Client client) {
+        response.then().body("success", is(true))
+                .body("user.email", is(client.getEmail()))
+                .body("user.name", is(client.getName()));
+    }
+
+    @Step("Проверка корректной ошибки при смене данных не авторизованного пользователя")
+    public void checkErrorUpdateDataClient(Response response) {
+        response.then().body("success", is(false))
+                .body("message", is("You should be authorised"));
+
+    }
+
+    @Step("Проверка корректности ошибки в случае если при смене используется занятый email адрес")
+    public void checkErrorChangeDataClientBusyEmail(Response response, Client clientUpdate) {
+        response.then().body("success", is(false))
+                .body("message", is("User with such email already exists"));
     }
 }
