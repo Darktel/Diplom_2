@@ -18,21 +18,20 @@ import java.util.List;
 
 public class TestCreateOrder {
     private ClientIngredient clientIngredient = new ClientIngredient();
-    private Faker faker = new Faker();
-    private ClientClient clientClient = new ClientClient();
+    private final Faker faker = new Faker();
+    private final ClientClient clientClient = new ClientClient();
     private Client client;
-    private Ingredient ClientIngredient;
-    private Ingredient allIngredient;
     private List<String> orderIngredient;
     private ClientOrder clientOrder = new ClientOrder();
     private CheckOrder checkOrder = new CheckOrder();
     private List<String> brokenIngredient = new ArrayList<>();
 
     @BeforeEach
+    @DisplayName("Подготовка пользователя для тестов и ингредиентов")
     public void setUp() {
         orderIngredient = new ArrayList<>();
         client = new Client(faker.name().firstName(), faker.internet().emailAddress(), faker.internet().password());
-        allIngredient = clientIngredient.getIngredientList();
+        Ingredient allIngredient = clientIngredient.getIngredientList();
         orderIngredient.add(allIngredient.getData().get(1).get_id());
         orderIngredient.add(allIngredient.getData().get(4).get_id());
         orderIngredient.add(allIngredient.getData().get(2).get_id());
@@ -40,6 +39,7 @@ public class TestCreateOrder {
     }
 
     @AfterEach
+    @DisplayName("Удаление пользователя")
     public void tearDown() {
         clientClient.deleteClient(clientClient.getTokenClient(client));
     }

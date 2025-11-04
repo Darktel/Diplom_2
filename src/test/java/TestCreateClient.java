@@ -15,6 +15,7 @@ public class TestCreateClient {
     private Client client;
 
     @BeforeEach
+    @DisplayName("Подготовка пользователя для тестов")
     public void setUp() {
         client = new Client(faker.name().firstName(), faker.internet().emailAddress(), faker.internet().password());
 
@@ -38,6 +39,7 @@ public class TestCreateClient {
     }
 
     @AfterEach
+    @DisplayName("Удаление пользователя")
     public void tearDown() {
         apiClient.deleteClient(apiClient.getTokenClient(client));
     }

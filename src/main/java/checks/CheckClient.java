@@ -7,7 +7,6 @@ import models.Client;
 import org.apache.http.HttpStatus;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CheckClient{
@@ -70,6 +69,7 @@ public class CheckClient{
                 .body("message", is("Email, password and name are required fields"));
     }
 
+    @Step("Проверка корректности структуры ответа при авторизации пользователя")
     public void checkSuccessLoginUser(Response response, Client client) {
         response.then()
                 .body("success", is(true))

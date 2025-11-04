@@ -21,6 +21,7 @@ public class ClientOrder {
                 .post("orders");
     }
 
+    @Step("Создание заказа авторизованным пользователем")
     public Response createOrderWithAuthorization(Order order, String tokenClient) {
         return given()
                 .spec(baseHttpClient.requestSpecification)
@@ -30,12 +31,29 @@ public class ClientOrder {
                 .post("orders");
     }
 
+    @Step("Создание заказа авторизованным пользователем без ингредиентов")
     public Response createOrderWithoutIngredient(String tokenClient) {
         return given()
                 .spec(baseHttpClient.requestSpecification)
                 .header("Authorization", tokenClient)
                 .when()
                 .post("orders");
+    }
 
+    @Step("Создание заказа авторизованным пользователем без авториации")
+    public Response getOrderClientWithAuthorization(String tokenClient) {
+        return given()
+                .spec(baseHttpClient.requestSpecification)
+                .header("Authorization", tokenClient)
+                .when()
+                .get("orders");
+    }
+
+    @Step("Получение заказа пользователем без авторизации")
+    public Response getOrderClientWithoutAuthorization() {
+        return given()
+                .spec(baseHttpClient.requestSpecification)
+                .when()
+                .get("orders");
     }
 }

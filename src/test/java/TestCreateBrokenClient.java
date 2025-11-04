@@ -17,6 +17,7 @@ public class TestCreateBrokenClient {
     private Client clientWithOutPassword;
 
     @BeforeEach
+    @DisplayName("Подготовка пользователей для тестов")
     public void setUp() {
         clientWithOutFirstName = new Client(null, faker.internet().emailAddress(), faker.internet().password());
         clientWithOutEmailAddress = new Client(faker.name().firstName(),null, faker.internet().password());
@@ -48,6 +49,7 @@ public class TestCreateBrokenClient {
     }
 
     @AfterEach
+    @DisplayName("Удаление пользователей")
     public void tearDown() {
         apiClient.deleteClient(apiClient.getTokenClient(clientWithOutFirstName));
         apiClient.deleteClient(apiClient.getTokenClient(clientWithOutEmailAddress));
